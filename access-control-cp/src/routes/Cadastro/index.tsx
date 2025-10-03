@@ -32,7 +32,7 @@ export default function Cadastro(){
                     style={{width: '100%', padding: '8px', marginTop: '5px'}} />
                 </div>
 
-                <button type="submit" style={{padding: '10px', backgroundColor: '#a72855ff', color: 'white', border: 'none'}}>
+                <button type="submit" style={{padding: '10px', backgroundColor: '#a72855ff', color: 'white', border: 'none', cursor: 'pointer'}}>
                     Cadastrar
                 </button>
             </form>

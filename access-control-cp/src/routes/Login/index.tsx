@@ -30,15 +30,14 @@ export default function Login(){
 
                 <button
                 type="submit"
-                style={{padding: '10px', backgroundColor: '#57d1fec7', color: 'white', border: 'none'}}
-                >
-                    Entrar
+                style={{padding: '10px', backgroundColor: '#57d1fec7', color: 'white', border: 'none', cursor: 'pointer'}}> 
+                Entrar
                 </button>
             </form>
 
             <p style={{marginTop: '20px', textAlign: 'center'}}>
                 Não tem uma conta?
-                <Link to="/Cadastro" style={{marginLeft: '5px', color: '#57d1fec7'}}>
+                <Link to="/cadastro" style={{marginLeft: '5px', color: '#57d1fec7'}}>
                 Cadastre-se
                 </Link>
             </p>
