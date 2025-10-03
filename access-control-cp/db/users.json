@@ -1,0 +1,22 @@
+{
+    "usuarios": [
+        {
+            "id": 1,
+            "nome": "Laura Lopes",
+            "nomeUsuario": "lopeslaura",
+            "email": "lauralopes@gmail.com"
+        },
+        {
+            "id": 2,
+            "nome": "Maicon Douglas",
+            "nomeUsuario": "douglasmaicon",
+            "email": "maicondouglas@gmail.com"
+        },
+        {
+            "id": 3,
+            "nome": "Richard Freitas",
+            "nomeUsuario": "freitasrick",
+            "email": "rickfreitas@gmail.com"
+        }
+    ]
+}
