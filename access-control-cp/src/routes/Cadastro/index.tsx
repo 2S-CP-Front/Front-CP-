@@ -1,9 +1,6 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { Header } from "../../compenents/Header/Header"; // Ajuste o caminho conforme sua estrutura
+import { Header } from "../../compenents/Header/Header";
 
-// ====================================================================================
-// COMMIT 2: feat(form): Configura useForm e tipagens Inputs/User
-// ====================================================================================
 
 type Inputs = {
   nome: string;
@@ -27,10 +24,6 @@ function Cadastro() {
     reset,
   } = useForm<Inputs>();
 
-  // ====================================================================================
-  // COMMIT 7: feat(submit): Cria função onSubmit e pré-processamento
-  // ====================================================================================
-
   const onSubmit: SubmitHandler<Inputs> = async (raw) => {
     const data: Inputs = {
       nome: raw.nome.trim(),
@@ -38,9 +31,6 @@ function Cadastro() {
       email: raw.email.trim().toLowerCase(),
     };
 
-    // ====================================================================================
-    // COMMIT 8: feat(api): Adiciona validação de duplicidade (GET)
-    // ====================================================================================
 
     const resp = await fetch("http://localhost:3000/usuarios");
     const usuarios: User[] = await resp.json();
@@ -68,19 +58,11 @@ function Cadastro() {
 
     if (existeUser || existeEmail) return;
 
-    // ====================================================================================
-    // COMMIT 9: feat(api): Envio dos dados para API (POST)
-    // ====================================================================================
-
     const post = await fetch("http://localhost:3000/usuarios", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-
-    // ====================================================================================
-    // COMMIT 10: fix(api): Trata sucesso e erro pós-cadastro
-    // ====================================================================================
 
     if (!post.ok) {
       setError("nomeUsuario", {
@@ -100,10 +82,6 @@ function Cadastro() {
     reset();
     window.location.reload();
   };
-  // ====================================================================================
-  // COMMIT 1: feat: Cria componente Cadastro e estrutura inicial
-  // (Neste commit, adicione o esqueleto do componente e o bloco <Header> e <section>)
-  // ====================================================================================
 
   return (
     <>
@@ -172,7 +150,7 @@ function Cadastro() {
           {/* Botão de Submit */}
           <button
             type="submit"
-            className="mt-4 bg-blue-700 text-white py-2 rounded-md hover:bg-blue-800 transition duration-150"
+            className="justify-self-end rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300"
           >
             Cadastrar
           </button>
