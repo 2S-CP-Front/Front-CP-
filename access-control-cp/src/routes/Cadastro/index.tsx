@@ -160,3 +160,7 @@ function Cadastro() {
               id="email"
               placeholder="user.name@example.com"
               className="rounded-md border-2 border-blue-700 px-2 py-1 hover:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              {...register("email", {
+                required: "Campo e-mail é obrigatório",
+              })}
+            />
