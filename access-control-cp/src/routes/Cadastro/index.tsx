@@ -27,9 +27,9 @@ function Cadastro() {
     reset,
   } = useForm<Inputs>();
 
-// ====================================================================================
-// COMMIT 7: feat(submit): Cria função onSubmit e pré-processamento
-// ====================================================================================
+  // ====================================================================================
+  // COMMIT 7: feat(submit): Cria função onSubmit e pré-processamento
+  // ====================================================================================
 
   const onSubmit: SubmitHandler<Inputs> = async (raw) => {
     const data: Inputs = {
@@ -38,9 +38,9 @@ function Cadastro() {
       email: raw.email.trim().toLowerCase(),
     };
 
-// ====================================================================================
-// COMMIT 8: feat(api): Adiciona validação de duplicidade (GET)
-// ====================================================================================
+    // ====================================================================================
+    // COMMIT 8: feat(api): Adiciona validação de duplicidade (GET)
+    // ====================================================================================
 
     const resp = await fetch("http://localhost:3000/usuarios");
     const usuarios: User[] = await resp.json();
@@ -68,9 +68,9 @@ function Cadastro() {
 
     if (existeUser || existeEmail) return;
 
-// ====================================================================================
-// COMMIT 9: feat(api): Envio dos dados para API (POST)
-// ====================================================================================
+    // ====================================================================================
+    // COMMIT 9: feat(api): Envio dos dados para API (POST)
+    // ====================================================================================
 
     const post = await fetch("http://localhost:3000/usuarios", {
       method: "POST",
@@ -78,9 +78,9 @@ function Cadastro() {
       body: JSON.stringify(data),
     });
 
-// ====================================================================================
-// COMMIT 10: fix(api): Trata sucesso e erro pós-cadastro
-// ====================================================================================
+    // ====================================================================================
+    // COMMIT 10: fix(api): Trata sucesso e erro pós-cadastro
+    // ====================================================================================
 
     if (!post.ok) {
       setError("nomeUsuario", {
@@ -100,13 +100,26 @@ function Cadastro() {
     reset();
     window.location.reload();
   };
-// ====================================================================================
-// COMMIT 1: feat: Cria componente Cadastro e estrutura inicial
-// (Neste commit, adicione o esqueleto do componente e o bloco <Header> e <section>)
-// ====================================================================================
+  // ====================================================================================
+  // COMMIT 1: feat: Cria componente Cadastro e estrutura inicial
+  // (Neste commit, adicione o esqueleto do componente e o bloco <Header> e <section>)
+  // ====================================================================================
 
   return (
     <>
       <Header />
       <section className="grid h-screen place-content-center">
         <h1>Cadastro</h1>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="grid min-w-100 gap-y-2 rounded-2xl px-4 py-2 shadow-lg"
+          noValidate
+        >
+          {/* Campo Nome Completo */}
+          <div className="grid gap-y-1">
+            <label htmlFor="nome">Nome completo</label>
+            <input
+              type="text"
+              id="nome"
+              placeholder="Seu nome"
+              className="rounded-md border-2 border-blue-700 px-2 py-1 hover:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
