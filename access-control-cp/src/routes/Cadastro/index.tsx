@@ -152,3 +152,11 @@ function Cadastro() {
               </small>
             )}
           </div>
+          {/* Campo E-mail */}
+          <div className="grid gap-y-1">
+            <label htmlFor="email">E-mail</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="user.name@example.com"
+              className="rounded-md border-2 border-blue-700 px-2 py-1 hover:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
