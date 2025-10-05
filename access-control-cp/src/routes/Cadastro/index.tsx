@@ -24,10 +24,29 @@ function Cadastro() {
     setError,
     reset,
   } = useForm<Inputs>();
+}
+const resp = await fetch("http://localhost:3000/usuarios");
+    const usuarios: User[] = await resp.json();
 
-const onSubmit: SubmitHandler<Inputs> = async (raw) => {
-    const data: Inputs = {
-      nome: raw.nome.trim(),
-      nomeUsuario: raw.nomeUsuario.trim().toLowerCase(),
-      email: raw.email.trim().toLowerCase(),
-    };
+    const existeUser = usuarios.some(
+      (u) => u.nomeUsuario.toLowerCase() === data.nomeUsuario
+    );
+    const existeEmail = usuarios.some(
+      (u) => u.email.toLowerCase() === data.email
+    );
+
+    if (existeUser) {
+      setError("nomeUsuario", {
+        type: "duplicate",
+        message: "Nome de usuário já em uso.",
+      });
+    }
+
+    if (existeEmail) {
+      setError("email", {
+        type: "duplicate",
+        message: "E-mail já cadastrado.",
+      });
+    }
+
+    if (existeUser || existeEmail) return;
