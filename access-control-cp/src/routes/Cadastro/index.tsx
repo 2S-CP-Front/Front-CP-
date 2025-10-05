@@ -1,7 +1,8 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { Header } from "../../compenents/Header/Header"; // Ajuste o caminho conforme sua estrutura
 
-// Tipos de dados
+
+
 type Inputs = {
   nome: string;
   nomeUsuario: string;
@@ -14,3 +15,13 @@ type User = {
   nomeUsuario: string;
   email: string;
 };
+
+function Cadastro() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+    reset,
+  } = useForm<Inputs>();
+
