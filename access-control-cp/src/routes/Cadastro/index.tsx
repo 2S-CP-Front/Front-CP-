@@ -146,3 +146,9 @@ function Cadastro() {
                 minLength: { value: 3, message: "Mínimo 3 caracteres" },
               })}
             />
+            {errors.nomeUsuario && (
+              <small className="text-red-500">
+                {errors.nomeUsuario.message}
+              </small>
+            )}
+          </div>
