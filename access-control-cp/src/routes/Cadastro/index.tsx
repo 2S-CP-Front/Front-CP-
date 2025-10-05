@@ -25,3 +25,9 @@ function Cadastro() {
     reset,
   } = useForm<Inputs>();
 
+const onSubmit: SubmitHandler<Inputs> = async (raw) => {
+    const data: Inputs = {
+      nome: raw.nome.trim(),
+      nomeUsuario: raw.nomeUsuario.trim().toLowerCase(),
+      email: raw.email.trim().toLowerCase(),
+    };
