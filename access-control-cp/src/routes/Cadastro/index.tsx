@@ -164,3 +164,20 @@ function Cadastro() {
                 required: "Campo e-mail é obrigatório",
               })}
             />
+            {errors.email && (
+              <small className="text-red-500">{errors.email.message}</small>
+            )}
+          </div>
+
+          {/* Botão de Submit */}
+          <button
+            type="submit"
+            className="mt-4 bg-blue-700 text-white py-2 rounded-md hover:bg-blue-800 transition duration-150"
+          >
+            Cadastrar
+          </button>
+        </form>
+      </section>
+    </>
+  );
+}
