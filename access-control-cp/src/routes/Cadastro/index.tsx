@@ -1,61 +1,88 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { Header } from "../../compenents/Header/Header"; // Ajuste o caminho conforme sua estrutura
 
-
+// ====================================================================================
+// COMMIT 2: feat(form): Configura useForm e tipagens Inputs/User
+// ====================================================================================
 
 type Inputs = {
-    nome: string;
-    nomeUsuario: string;
-    email: string;
+  nome: string;
+  nomeUsuario: string;
+  email: string;
 };
 
 type User = {
-    id: number;
-    nome: string;
-    nomeUsuario: string;
-    email: string;
+  id: number;
+  nome: string;
+  nomeUsuario: string;
+  email: string;
 };
 
 function Cadastro() {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        setError,
-        reset,
-    } = useForm<Inputs>();
-}
-const resp = await fetch("http://localhost:3000/usuarios");
-const usuarios: User[] = await resp.json();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+    reset,
+  } = useForm<Inputs>();
 
-const existeUser = usuarios.some(
-    (u) => u.nomeUsuario.toLowerCase() === data.nomeUsuario
-);
-const existeEmail = usuarios.some(
-    (u) => u.email.toLowerCase() === data.email
-);
+// ====================================================================================
+// COMMIT 7: feat(submit): Cria função onSubmit e pré-processamento
+// ====================================================================================
 
-if (existeUser) {
-    setError("nomeUsuario", {
+  const onSubmit: SubmitHandler<Inputs> = async (raw) => {
+    const data: Inputs = {
+      nome: raw.nome.trim(),
+      nomeUsuario: raw.nomeUsuario.trim().toLowerCase(),
+      email: raw.email.trim().toLowerCase(),
+    };
+
+// ====================================================================================
+// COMMIT 8: feat(api): Adiciona validação de duplicidade (GET)
+// ====================================================================================
+
+    const resp = await fetch("http://localhost:3000/usuarios");
+    const usuarios: User[] = await resp.json();
+
+    const existeUser = usuarios.some(
+      (u) => u.nomeUsuario.toLowerCase() === data.nomeUsuario
+    );
+    const existeEmail = usuarios.some(
+      (u) => u.email.toLowerCase() === data.email
+    );
+
+    if (existeUser) {
+      setError("nomeUsuario", {
         type: "duplicate",
         message: "Nome de usuário já em uso.",
-    });
-}
+      });
+    }
 
-if (existeEmail) {
-    setError("email", {
+    if (existeEmail) {
+      setError("email", {
         type: "duplicate",
         message: "E-mail já cadastrado.",
-    });
-}
+      });
+    }
 
-if (existeUser || existeEmail) return;
-const post = await fetch("http://localhost:3000/usuarios", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-});
- if (!post.ok) {
+    if (existeUser || existeEmail) return;
+
+// ====================================================================================
+// COMMIT 9: feat(api): Envio dos dados para API (POST)
+// ====================================================================================
+
+    const post = await fetch("http://localhost:3000/usuarios", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+// ====================================================================================
+// COMMIT 10: fix(api): Trata sucesso e erro pós-cadastro
+// ====================================================================================
+
+    if (!post.ok) {
       setError("nomeUsuario", {
         type: "server",
         message: "Falha ao cadastrar. Tente novamente.",
@@ -73,4 +100,13 @@ const post = await fetch("http://localhost:3000/usuarios", {
     reset();
     window.location.reload();
   };
+// ====================================================================================
+// COMMIT 1: feat: Cria componente Cadastro e estrutura inicial
+// (Neste commit, adicione o esqueleto do componente e o bloco <Header> e <section>)
+// ====================================================================================
 
+  return (
+    <>
+      <Header />
+      <section className="grid h-screen place-content-center">
+        <h1>Cadastro</h1>
