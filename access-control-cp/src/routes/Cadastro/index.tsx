@@ -55,3 +55,22 @@ const post = await fetch("http://localhost:3000/usuarios", {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
 });
+ if (!post.ok) {
+      setError("nomeUsuario", {
+        type: "server",
+        message: "Falha ao cadastrar. Tente novamente.",
+      });
+      setError("email", {
+        type: "server",
+        message: "Falha ao cadastrar. Tente novamente.",
+      });
+      return;
+    }
+
+    const novo: User = await post.json();
+    localStorage.setItem("name", novo.nome);
+    alert(`Cadastro realizado para: ${novo.nomeUsuario}`);
+    reset();
+    window.location.reload();
+  };
+
