@@ -15,7 +15,7 @@ type User = {
   email: string;
 };
 
-function Cadastro() {
+export function Cadastro() {
   const {
     register,
     handleSubmit,
